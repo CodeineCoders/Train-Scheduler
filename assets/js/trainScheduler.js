@@ -30,12 +30,19 @@ $(document).ready( function() {
 
   database.ref().push({
       train: trainName,
+      trainDestination: destination,
+      trainTime: time,
+      trainFrequency: frequency
 
   })
 
   database.ref().on("child_added", function(snapshot) {
       console.log(snapshot.val());
       console.log(snapshot.val().train);
+      console.log(snapshot.val().trainDestination);
+      console.log(snapshot.val().trainTime);
+      console.log(snapshot.val().trainFrequency);
+      
   });
 
 
