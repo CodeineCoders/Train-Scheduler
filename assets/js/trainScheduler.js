@@ -12,7 +12,7 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
 
-//grabbing database from firebase
+    //grabbing database from firebase
 
     database.ref().on("child_added", function (snapshot) {
 
@@ -20,11 +20,13 @@ $(document).ready(function () {
         var trainDestination = snapshot.val().trainDestination;
         var trainTime = snapshot.val().trainTime;
         var trainFrequency = snapshot.val().trainFrequency
-// adding input to tbody
+        // adding input to tbody
         $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td></tr>");
 
+
+
     });
-// submit button and adding new train
+    // submit button and adding new train
     $("button").click(function () {
 
         var trainName = $("#inputTrainName").val().trim();
@@ -32,14 +34,13 @@ $(document).ready(function () {
         var time = $("#inputTime").val().trim();
         var frequency = $("#inputFrequency").val().trim();
 
-
         var addedTrain = {
             train: trainName,
             trainDestination: destination,
             trainTime: time,
             trainFrequency: frequency
         }
-// reseting the database with empty .val("");
+        // reseting the database with empty .val("");
         database.ref().push(addedTrain);
 
         $("#inputTrainName").val("");
