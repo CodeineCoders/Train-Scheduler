@@ -12,6 +12,8 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
 
+    var currentTime = moment();
+    
     //grabbing database from firebase
 
     database.ref().on("child_added", function (snapshot) {
@@ -19,13 +21,21 @@ $(document).ready(function () {
         var train = snapshot.val().train;
         var trainDestination = snapshot.val().trainDestination;
         var trainTime = snapshot.val().trainTime;
-        var trainFrequency = snapshot.val().trainFrequency
+        var trainFrequency = snapshot.val().trainFrequency;
+
+        var arrival = snapshot.val().arrival;
+
         // adding input to tbody
-        $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td></tr>");
+        $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td><td>" + arrival + "</td></tr>");
 
 
 
     });
+
+    database.ref().on("value", function(snapshot) {
+
+    });
+
     // submit button and adding new train
     $("button").click(function () {
 
@@ -34,11 +44,19 @@ $(document).ready(function () {
         var time = $("#inputTime").val().trim();
         var frequency = $("#inputFrequency").val().trim();
 
+        var firstTrainConverted = moment(time, "hh:mm").subtract("1, years");
+        var difference = currentTime.diff(moment(firstTrainConverted), "minutes");
+        var remainder = difference % frequency;
+        var minUntilTrain = frequency - remainder;
+        var nextTrain = moment().add(minUntilTrain, "minutes").format("hh:mm a");
+
+
         var addedTrain = {
             train: trainName,
             trainDestination: destination,
             trainTime: time,
-            trainFrequency: frequency
+            trainFrequency: frequency,
+            arrival: nextTrain
         }
         // reseting the database with empty .val("");
         database.ref().push(addedTrain);
