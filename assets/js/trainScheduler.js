@@ -42,9 +42,18 @@ $(document).ready( function() {
       console.log(snapshot.val().trainDestination);
       console.log(snapshot.val().trainTime);
       console.log(snapshot.val().trainFrequency);
-      
+
+      $("#inputTrainName").text(snapshot.val().train);
+
   });
 
+
+  function addToTable(){
+      var tbody = $("tbody");
+      tbody.append("<tr><td>" + trainName + "</td></tr>");
+  }
+
+  addToTable();
 
 });
 
