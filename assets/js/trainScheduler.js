@@ -1,9 +1,17 @@
 $(document).ready( function() {
 
+    var trainName;
+    var destination;
+    var time;
+    var frequency;
 
 
+    $("button").click(function() {
 
-
+    trainName = $("#inputTrainName").val().trim();
+    destination = $("#inputDestination").val().trim();
+    time = $("#inputTime").val().trim();
+    frequency = $("#inputFrequency").val().trim();
 
 
   // Initialize Firebase
@@ -18,6 +26,20 @@ $(document).ready( function() {
   firebase.initializeApp(config);
   var database = firebase.database();
 
+  event.preventDefault();
+
+  database.ref().push({
+      train: trainName,
+
+  })
+
+  database.ref().click(function(snapshot){
+      console.log(snapshot.val());
+      console.log(snapshot.val().train);
+  })
+
+
+});
 
 
     
