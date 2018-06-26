@@ -1,64 +1,54 @@
-$(document).ready( function() {
+$(document).ready(function () {
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBwUgolHJtNB8h7yLC9Z8uCllmMQmMjuAA",
+        authDomain: "train-scheduler-743f3.firebaseapp.com",
+        databaseURL: "https://train-scheduler-743f3.firebaseio.com",
+        projectId: "train-scheduler-743f3",
+        storageBucket: "train-scheduler-743f3.appspot.com",
+        messagingSenderId: "373305274421"
+    };
 
-    var trainName;
-    var destination;
-    var time;
-    var frequency;
+    firebase.initializeApp(config);
+    var database = firebase.database();
 
+//grabbing database from firebase
 
-    $("button").click(function() {
+    database.ref().on("child_added", function (snapshot) {
 
-    trainName = $("#inputTrainName").val().trim();
-    destination = $("#inputDestination").val().trim();
-    time = $("#inputTime").val().trim();
-    frequency = $("#inputFrequency").val().trim();
+        var train = snapshot.val().train;
+        var trainDestination = snapshot.val().trainDestination;
+        var trainTime = snapshot.val().trainTime;
+        var trainFrequency = snapshot.val().trainFrequency
+// adding input to tbody
+        $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td></tr>");
 
+    });
+// submit button and adding new train
+    $("button").click(function () {
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBwUgolHJtNB8h7yLC9Z8uCllmMQmMjuAA",
-    authDomain: "train-scheduler-743f3.firebaseapp.com",
-    databaseURL: "https://train-scheduler-743f3.firebaseio.com",
-    projectId: "train-scheduler-743f3",
-    storageBucket: "train-scheduler-743f3.appspot.com",
-    messagingSenderId: "373305274421"
-  };
-  firebase.initializeApp(config);
-  var database = firebase.database();
-
-  event.preventDefault();
-
-  database.ref().push({
-      train: trainName,
-      trainDestination: destination,
-      trainTime: time,
-      trainFrequency: frequency
-
-  })
-
-  database.ref().on("child_added", function(snapshot) {
-      console.log(snapshot.val());
-      console.log(snapshot.val().train);
-      console.log(snapshot.val().trainDestination);
-      console.log(snapshot.val().trainTime);
-      console.log(snapshot.val().trainFrequency);
-
-      $("#inputTrainName").text(snapshot.val().train);
-
-  });
+        var trainName = $("#inputTrainName").val().trim();
+        var destination = $("#inputDestination").val().trim();
+        var time = $("#inputTime").val().trim();
+        var frequency = $("#inputFrequency").val().trim();
 
 
-  function addToTable(){
-      var tbody = $("tbody");
-      tbody.append("<tr><td>" + trainName + "</td></tr>");
-  }
+        var addedTrain = {
+            train: trainName,
+            trainDestination: destination,
+            trainTime: time,
+            trainFrequency: frequency
+        }
+// reseting the database with empty .val("");
+        database.ref().push(addedTrain);
 
-  addToTable();
+        $("#inputTrainName").val("");
+        $("#inputDestination").val("");
+        $("#inputTime").val("");
+        $("#inputFrequency").val("");
 
-});
+    });
 
-
-    
 
 
 
