@@ -33,10 +33,10 @@ $(document).ready( function() {
 
   })
 
-  database.ref().click(function(snapshot){
+  database.ref().on("child_added", function(snapshot) {
       console.log(snapshot.val());
       console.log(snapshot.val().train);
-  })
+  });
 
 
 });
