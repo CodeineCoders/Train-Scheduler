@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyBwUgolHJtNB8h7yLC9Z8uCllmMQmMjuAA",
@@ -11,11 +12,11 @@ $(document).ready(function () {
 
     firebase.initializeApp(config);
     var database = firebase.database();
+
 //moment.js
     var currentTime = moment();
 
     //grabbing database from firebase
-
     database.ref().on("child_added", function (snapshot) {
 
         var train = snapshot.val().train;
@@ -24,9 +25,10 @@ $(document).ready(function () {
         var trainFrequency = snapshot.val().trainFrequency;
 
         var arrival = snapshot.val().arrival;
+        var minutes = snapshot.val().minutes;
 
         // adding input to tbody
-        $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td><td>" + arrival + "</td></tr>");
+        $("tbody").append("<tr><td>" + train + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td><td>" + arrival + "</td><td>" + minutes + "</td></tr>");
 
 
 
@@ -39,6 +41,7 @@ $(document).ready(function () {
         var destination = $("#inputDestination").val().trim();
         var time = $("#inputTime").val().trim();
         var frequency = $("#inputFrequency").val().trim();
+
         //moment.js
         var firstTrainConverted = moment(time, "hh:mm").subtract("1, years");
         var difference = currentTime.diff(moment(firstTrainConverted), "minutes");
@@ -52,7 +55,10 @@ $(document).ready(function () {
             trainDestination: destination,
             trainTime: time,
             trainFrequency: frequency,
-            arrival: nextTrain
+
+            //moment.js
+            arrival: nextTrain,
+            minutes: minUntilTrain
         }
         // reseting the database with empty .val("");
         database.ref().push(addedTrain);
