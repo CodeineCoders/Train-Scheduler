@@ -11,9 +11,9 @@ $(document).ready(function () {
 
     firebase.initializeApp(config);
     var database = firebase.database();
-
+//moment.js
     var currentTime = moment();
-    
+
     //grabbing database from firebase
 
     database.ref().on("child_added", function (snapshot) {
@@ -32,10 +32,6 @@ $(document).ready(function () {
 
     });
 
-    database.ref().on("value", function(snapshot) {
-
-    });
-
     // submit button and adding new train
     $("button").click(function () {
 
@@ -43,7 +39,7 @@ $(document).ready(function () {
         var destination = $("#inputDestination").val().trim();
         var time = $("#inputTime").val().trim();
         var frequency = $("#inputFrequency").val().trim();
-
+        //moment.js
         var firstTrainConverted = moment(time, "hh:mm").subtract("1, years");
         var difference = currentTime.diff(moment(firstTrainConverted), "minutes");
         var remainder = difference % frequency;
