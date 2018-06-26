@@ -1,0 +1,33 @@
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.jumbotron{
+    border: 2px solid gray;
+}
+
+.topTable{
+    margin: 20px;
+}
+
+.bottomTable{
+    margin: 20px;
+   text-align: center;
+}
+
+.input{
+    padding: 10px;
+    
+}
+
+.col-form-label{
+    margin-right: -16%;
+    text-align: center;
+}
+
+.img{
+    margin: 10px;
+    float: right;
+    border: 2px solid gray;
+    
+}

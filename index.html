@@ -15,62 +15,75 @@
 
 <body>
     <header>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-3">Anytime is Train Time</h1>
-                <p class="lead">Choo Choo. Chee Chee.</p>
-            </div>
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-3">Anytime is Train Time</h1>
+                            <p class="lead">Choo Choo. Chee Chee.</p>
+                            <img class="img" src="assets/img/train.jpg" alt="train" width="100" height="100">
+                        </div>
+                    </div>
     </header>
+    </div>
+    </div>
+    <div class="row topTable">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr class="trainInfo">
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Train Time (military time)</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <table class="table">
-        <thead class="thead-light">
-            <tr class="trainInfo">
-                <th>Train Name</th>
-                <th>Destination</th>
-                <th>Train Time (military time)</th>
-                <th>Frequency (min)</th>
-                <th>Next Arrival</th>
-                <th>Minutes Away</th>
-            </tr>
-        </thead>
-        <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        </tbody>
-    </table>
+    <div class="row bottomTable">
+        <div class="col-md-12">
+            <table class="tableInput">
+                <form>
+                    <div class="form-group row">
+                        <label for="inputTrainName" class="col-sm-6 col-form-label">Train Name</label>
+                        <div class="col-sm-4 input">
+                            <input type="name" class="form-control" id="inputTrainName">
+                        </div>
 
-    <table class="tableInput">
-            <form>
-                <div class="form-group row">
-                    <label for="inputTrainName" class="col-sm-2 col-form-label">Train Name</label>
-                    <div class="col-sm-10">
-                        <input type="name" class="form-control" id="inputTrainName">
+                        <label for="inputDestination" class="col-sm-6 col-form-label">Destination</label>
+                        <div class="col-sm-4 input">
+                            <input type="location" class="form-control" id="inputDestination">
+                        </div>
+
+                        <label for="inputTime" class="col-sm-6 col-form-label">First Train Time</label>
+                        <div class="col-sm-4 input">
+                            <input type="time" class="form-control" id="inputTime">
+                        </div>
+
+                        <label for="inputFrequency" class="col-sm-6 col-form-label">Frequency (min)</label>
+                        <div class="col-sm-4 input">
+                            <input type="timer" class="form-control" id="inputFrequency">
+                        </div>
+
                     </div>
-
-                    <label for="inputDestination" class="col-sm-2 col-form-label">Destination</label>
-                    <div class="col-sm-10">
-                        <input type="location" class="form-control" id="inputDestination">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-
-                    <label for="inputTime" class="col-sm-2 col-form-label">First Train Time</label>
-                    <div class="col-sm-10">
-                        <input type="time" class="form-control" id="inputTime">
-                    </div>
-
-                    <label for="inputFrequency" class="col-sm-2 col-form-label">Frequency (min)</label>
-                    <div class="col-sm-10">
-                        <input type="timer" class="form-control" id="inputFrequency">
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
-    </table>
-
+                </form>
+            </table>
+        </div>
+    </div>
+    </div>
     <footer></footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/trainScheduler.js"></script>
